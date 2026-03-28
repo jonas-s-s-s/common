@@ -77,28 +77,7 @@ namespace solver {
 	using TObjective_Function = BOOL(IfaceCalling*)(const void *data, const size_t count, const double *solution, double * const fitness);
 
 	/* solver setup container */
-	class TSolver_Setup {
-	public:
-		TSolver_Setup(size_t problem_size, size_t objectives_count, const double* lower_bound,
-			const double* upper_bound, const double** hints, size_t hint_count, double* solution, const void* data,
-			TObjective_Function objective, TFitness_Comparator comparator, size_t max_generations,
-			size_t population_size, double tolerance)
-			: problem_size(problem_size),
-			  objectives_count(objectives_count),
-			  lower_bound(lower_bound),
-			  upper_bound(upper_bound),
-			  hints(hints),
-			  hint_count(hint_count),
-			  solution(solution),
-			  data(data),
-			  objective(objective),
-			  comparator(comparator),
-			  max_generations(max_generations),
-			  population_size(population_size),
-			  tolerance(tolerance)
-		{
-		}
-
+	struct TSolver_Setup {
 		/* size of the problem, e.g., number of parameters */
 		const size_t problem_size;
 		/* count of objectives to consider (always less or equal to Maximum_Objectives_Count */
@@ -127,8 +106,6 @@ namespace solver {
 		const size_t population_size;
 		/* tolerance indicating no further improvement between steps (where relevant) */
 		const double tolerance;
-
-		virtual ~TSolver_Setup() = default;
 	};
 
 	const TSolver_Setup Default_Solver_Setup = { 0, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr, 0, 0, std::numeric_limits<double>::min() };
