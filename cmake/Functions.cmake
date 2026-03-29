@@ -162,12 +162,12 @@ FUNCTION(APPLY_SCGMS_LIBRARY_BUILD_SETTINGS TARGET_NAME)
 		# -Wno-deprecated-declarations - mostly because of 3rd party libraries and their interfaces
 		# -Wno-unknown-pragmas - this is due to "disable warning" pragma we use to suppress ugly warnings on MSVS
 		ADD_COMPILE_OPTIONS(-Wall -Wextra -Wno-ignored-attributes -Wno-unused-parameter -fPIC)
-		ADD_COMPILE_OPTIONS($<$<COMPILE_LANGUAGE:CXX>:-Wno-ignored-attributes -Wno-deprecated-declarations -Wno-deprecated-copy -Wno-unknown-pragmas)
+		ADD_COMPILE_OPTIONS(-Wno-ignored-attributes -Wno-deprecated-declarations -Wno-deprecated-copy -Wno-unknown-pragmas)
 
 		# gcc reports a specific use case of copy semantics as deprecated, unlike Clang
 		IF ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 			ADD_COMPILE_OPTIONS(-Wimplicit-fallthrough=0)
-			ADD_COMPILE_OPTIONS($<$<COMPILE_LANGUAGE:CXX>:-Wno-deprecated-copy -Wno-class-memaccess)
+			ADD_COMPILE_OPTIONS(-Wno-deprecated-copy -Wno-class-memaccess)
 		ENDIF()
 
 		# debug build = no optimization, add debug symbols
